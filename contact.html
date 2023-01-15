@@ -33,6 +33,7 @@
 				<li><a href="pendidikan.html">PENDIDIKAN</a></li>
 				<li><a href="profil.html">PROFIL</a></li>
 				<li><a href="contact.html">CONTACT</a></li>
+				<li><a href="login.html">LOGIN</a></li>
 			</ul>
 		</div>
 	</header>
@@ -55,7 +56,7 @@
 				</div>
 				<div class="col-4">
 					<h4>Email</h4>
-					<p><a href="gmail.com" target="_blank">razak1352@gmial.com</a></p>
+					<p><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">razak1352@gmial.com</a></p>
 				</div>
 				<div class="col-4">
 					<h4>Wa</h4>
@@ -63,7 +64,7 @@
 				</div>
 				<div class="col-4">
 					<h4>ig</h4>
-					<p><a href="instagram.com/harist_10" target="_blank">harist_10</a></p>
+					<p><a href="https://www.instagram.com/harist_10/" target="_blank">harist_10</a></p>
 				</div>
 			</div>
 			<div class="kontainer">
@@ -71,22 +72,22 @@
 				<h1 align="center">Boleh tau anda siapa :)</h1>
 				
 				<br>
-				<form action="#">
+				<form action="#" id="frm">
 				  <div class="user-details">
 					<div class="input-box">
 					  <span class="details">nama</span>
-					  <input type="text" placeholder="masukan namamu">
+					  <input type="text" id="nama" placeholder="masukan namamu">
 					</div>
 					
 					<div class="input-box">
 					  <span class="details">Email</span>
-					  <input type="text" placeholder="masukan emailmu">
+					  <input type="text" id="email" placeholder="masukan emailmu">
 					</div>
 					
 					  <div class="input-box">
 						<span class="details">status</span>
 						
-					  <select class="kombo">
+					  <select class="kombo" id="status">
                     
 						
                         <option>mahasiswa</option>
@@ -96,21 +97,21 @@
 					</div>
 					<div class="input-box">
 					  <span class="details">no telpon</span>
-					  <input type="text" placeholder="masukan no telpon mu">
+					  <input type="text" id="telp" placeholder="masukan no telpon mu">
 					</div>
 					<div class="input-box">
 						<span class="details">alamat</span>
-						<textarea class="teks"></textarea>
+						<textarea class="teks" id="alamat"></textarea>
 					  </div>
 					  <div class="input-box">
 						<span class="details">Masukan gambar</span>
-						<input type="file">
+						<input type="file" id="gambar">
 					  </div>
 				  </div>
 				  <div class="gender-details">
-					<input type="radio" name="gender" id="dot-1">
-					<input type="radio" name="gender" id="dot-2">
-					<input type="radio" name="gender" id="dot-3">
+					<input type="radio" name="gender" id="dot-1" value="wanita">
+					<input type="radio" name="gender" id="dot-2" value="pria">
+					<input type="radio" name="gender" id="dot-3" value="waria">
 					<span class="gender-title">jenis kelamin</span>
 					<div class="category">
 					  <label for="dot-1">
@@ -131,15 +132,15 @@
 				  <span class="hobi">Hobi</span>
 				  
 				  <br>
-				  <input type="checkbox" id="makan" name="makan" value="makan">
+				  <input type="checkbox" id="makan" name="makan" value="makan" required>
 				  <label for="makan"> Makan</label><br>
-				  <input type="checkbox" id="turu" name="turu" value="turu">
+				  <input type="checkbox" id="turu" name="turu" value="turu" required>
 				  <label for="turu"> Turu</label><br>
-				  <input type="checkbox" id="ngoding" name="ngoding" value="Boat">
+				  <input type="checkbox" id="ngoding" name="ngoding" value="ngoding" required>
 				  <label for="ngoding"> nogding</label><br><br>
 				
 				  <div class="button">
-					<input type="submit" onclick="contoh()">
+					<input type="submit">
 				  </div>
 				</form>
 				</div>
@@ -162,27 +163,14 @@
 		})
 	</script>
 
+<script>
+	$(function() {
+		$("input[name='numonly']").on('input', function(e) {
+			$(this).val($(this).val().replace(/[^0-9]/g, ''))
+		})
+		})
+		</script>
 
-
-<script type="text/javascript">
-
-	function contoh() {
-
-	   swal({
-
-			title: "Berhasil!",
-
-			text: "anda adalah orang",
-
-			icon: "success",
-
-			button: true
-
-		});
-
-	}
-
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 
@@ -190,6 +178,86 @@
 
 	crossorigin="anonymous"></script>
 
-	
+	<script>
+		const form = document.getElementById('frm')
+const nama = document.getElementById('nama')
+const email = document.getElementById('email')
+const st = document.getElementById('status')
+const telp = document.getElementById('telp')
+const alamat = document.getElementById('alamat')
+const gambar = document.getElementById('gambar')
+const wanita = document.getElementById('dot-1')
+const pria = document.getElementById('dot-2')
+const waria = document.getElementById('dot-3')
+const hobi1 = document.getElementById('makan')
+const hobi2 = document.getElementById('turu')
+const hobi3 = document.getElementById('ngoding')
+
+const validasiHuruf = /^[a-zA-Z ]+$/;
+
+
+
+
+const dataForm = []	
+
+// const box = document.querySelector('.checkbox:checked').value;
+
+
+// function save(){
+    
+// }
+
+form.addEventListener('submit', function(event){
+    event.preventDefault()
+
+
+    var checkbox = document.getElementsByClassName("checkbox");
+    localStorage.setItem('program', checkbox.checked);
+    if(nama.value.match(validasiHuruf)){
+        dataForm.push({
+            "Nama": nama.value,
+           
+            "email": email.value,
+            "status": st.value,
+            "telp": telp.value,
+            "alamat": alamat.value,
+            "gambar": gambar.value,
+            "dot-1": wanita.value,
+            "dot-2": pria.value,
+            "dot-3": waria.value,
+            "makan": hobi1.value,
+            "turu": hobi2.value,
+            "ngoding": hobi3.value
+        })
+
+        let dataUserString = JSON.stringify(dataForm);
+        sessionStorage.setItem('dataUserKey', dataUserString);
+
+        alert("pendaftaran berhasil")
+		alert("silakan login dulu untuk melihat data")
+        window.location.href = "login.html"
+    }else{
+        alert("data nda boleh kosong")
+    }
+})
+var inputs = document.querySelectorAll('.button_img')
+
+for (var i = 0, len = inputs.length; i < len; i++) {
+  customInput(inputs[i])
+}
+
+function customInput (el) {
+  const fileInput = el.querySelector('[type="file"]')
+  const label = el.querySelector('[data-js-label]')
+  
+  fileInput.onchange =
+  fileInput.onmouseout = function () {
+    if (!fileInput.value) return
+    
+    var value = fileInput.value.replace(/^.*[\\\/]/, '')
+    el.className += ' -chosen'
+    label.innerText = value
+  }}
+	</script>
 </body>
 </html>
